@@ -16,7 +16,6 @@ class InfoMessage:
 
     def get_message(self) -> str:
         """Вывод информации о тренировки."""
-
         return (f"Тип тренировки: {self.training_type}; "
                 f"Длительность: {self.duration:.3f} ч.; "
                 f"Дистанция: {self.distance:.3f} км; "
@@ -28,7 +27,6 @@ class Training:
     """Базовый класс тренировки."""
     M_IN_KM: int = 1000
     LEN_STEP = 0.65
-    TRAINING_TYPE = ''
 
     def __init__(self,
                  action: int,
