@@ -45,7 +45,7 @@ class Training:
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
-        return self.get_distance()/self.duration
+        return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -70,8 +70,10 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.COEFF1 * self.get_mean_speed() - self.COEFF2) *
-                self.weight / super().M_IN_KM * self.duration * self.MINUTS)
+        result = self.COEFF1 * self.get_mean_speed() - self.COEFF2
+        result *= (self.weight / super().M_IN_KM
+                   * self.duration * self.MINUTS)
+        return result
 
 
 class SportsWalking(Training):
@@ -90,8 +92,11 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return ((self.COEFF1 * self.weight + ((self.get_mean_speed()**2 // self.height)
-                * self.COEFF2) * self.weight) * self.duration * self.MINUTS)
+        result = self.COEFF1 * self.weight
+        result += self.get_mean_speed()**2 // self.height
+        result *= (self.COEFF2 * self.weight
+                   * self.duration * self.MINUTS)
+        return result
 
 
 class Swimming(Training):
@@ -112,11 +117,11 @@ class Swimming(Training):
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
-        return self.length_pool*self.count_pool/super().M_IN_KM/self.duration
+        return self.length_pool * self.count_pool / super().M_IN_KM / self.duration
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return (self.get_mean_speed() + self.COEFF1)*self.COEFF2*self.weight
+        return (self.get_mean_speed() + self.COEFF1) * self.COEFF2 * self.weight
 
 
 def read_package(workout_type: str, data: list) -> Training:
