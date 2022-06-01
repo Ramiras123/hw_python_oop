@@ -132,8 +132,9 @@ def read_package(workout_type: str, data: list) -> Training:
         'WLK': SportsWalking
     }
     if workout_type not in workout_classes:
-        raise ValueError(f'{workout_type} - данного '
-                         f'трекера не существует')
+        raise ValueError(f'{workout_type} - данный '
+                         f'трекер неопознан, используйте: '
+                         f'SWM, RUN, WLK')
     else:
         return workout_classes[workout_type](*data)
 
