@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from typing import Dict, Type, Union
+from typing import List, Dict, Type
 
 
 @dataclass
@@ -125,7 +125,7 @@ class Swimming(Training):
         return result
 
 
-def read_package(workout_type: str, data: list[Union[int, float]]) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     workout_classes: Dict[str, Type[Training]] = {
         'SWM': Swimming,
@@ -133,7 +133,7 @@ def read_package(workout_type: str, data: list[Union[int, float]]) -> Training:
         'WLK': SportsWalking
     }
     if workout_type not in workout_classes:
-        info_workout_classes = ', '.join(list(workout_classes.keys()))
+        info_workout_classes = ', '.join(workout_classes.keys())
         info_error = (f'{workout_type} - данный '
                       'трекер неопознан, используйте: '
                       f'{info_workout_classes}')
