@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    INFO_MASSEGE = ('Тип тренировки: {0}; '
+    INFO_MASSAGE = ('Тип тренировки: {0}; '
                     'Длительность: {1:.3f} ч.; '
                     'Дистанция: {2:.3f} км; '
                     'Ср. скорость: {3:.3f} км/ч; '
@@ -18,7 +18,7 @@ class InfoMessage:
 
     def get_message(self) -> str:
         """Вывод информации о тренировки."""
-        return self.INFO_MASSEGE.format(*asdict(self).values())
+        return self.INFO_MASSAGE.format(*asdict(self).values())
 
 
 @dataclass
