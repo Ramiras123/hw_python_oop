@@ -4,37 +4,33 @@ from dataclasses import dataclass, asdict
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    training_type: str
-    duration: float
-    distance: float
-    speed: float
-    calories: float
-
     INFO_MASSEGE = ('Тип тренировки: {0}; '
                     'Длительность: {1:.3f} ч.; '
                     'Дистанция: {2:.3f} км; '
                     'Ср. скорость: {3:.3f} км/ч; '
                     'Потрачено ккал: {4:.3f}.')
 
+    training_type: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
+
     def get_message(self) -> str:
         """Вывод информации о тренировки."""
         return self.INFO_MASSEGE.format(*asdict(self).values())
 
 
+@dataclass
 class Training:
     """Базовый класс тренировки."""
-    M_IN_KM: int = 1000
+    M_IN_KM = 1000
     LEN_STEP = 0.65
     MINUTES = 60
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 ) -> None:
-        self.action = action
-        self.duration = duration
-        self.weight = weight
+    action: int
+    duration: float
+    weight: float
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -73,18 +69,16 @@ class Running(Training):
         return result
 
 
+@dataclass
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     COEFF1 = 0.035
     COEFF2 = 0.029
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 height: int) -> None:
-        super().__init__(action, duration, weight)
-        self.height = height
+    action: int
+    duration: float
+    weight: float
+    height: int
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
@@ -95,21 +89,18 @@ class SportsWalking(Training):
         return result
 
 
+@dataclass
 class Swimming(Training):
     """Тренировка: плавание."""
     LEN_STEP = 1.38
     COEFF1 = 1.1
     COEFF2 = 2
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 length_pool: int,
-                 count_pool: int) -> None:
-        super().__init__(action, duration, weight)
-        self.length_pool = length_pool
-        self.count_pool = count_pool
+    action: int
+    duration: float
+    weight: float
+    length_pool: int
+    count_pool: int
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
