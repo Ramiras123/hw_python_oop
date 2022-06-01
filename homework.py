@@ -9,7 +9,8 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-    info_message = ('Тип тренировки: {0}; '
+
+    INFO_MASSEGE = ('Тип тренировки: {0}; '
                     'Длительность: {1:.3f} ч.; '
                     'Дистанция: {2:.3f} км; '
                     'Ср. скорость: {3:.3f} км/ч; '
@@ -17,7 +18,7 @@ class InfoMessage:
 
     def get_message(self) -> str:
         """Вывод информации о тренировки."""
-        return self.info_message.format(*asdict(self).values())
+        return self.INFO_MASSEGE.format(*asdict(self).values())
 
 
 class Training:
